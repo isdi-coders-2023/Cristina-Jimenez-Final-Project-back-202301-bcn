@@ -55,15 +55,16 @@ describe("Given a generalError middleware", () => {
     describe("When it receives an error and an error with an invalid status code", () => {
       test("Then it should respond with status code 500", () => {
         const invalidStatusCode = NaN;
+        const defaultStatusCode = 500;
         const error = new CustomError("", invalidStatusCode, "");
 
         generalError(error, mockReq as Request, mockRes as Response, mockNext);
 
-        expect(mockRes.status).toHaveBeenCalledWith(500);
+        expect(mockRes.status).toHaveBeenCalledWith(defaultStatusCode);
       });
     });
 
-    describe("When it receives a response without a public message", () => {
+    describe("When it receives an error without a public message", () => {
       test("Then it should respond with the default error message 'Something went wrong'", () => {
         const error = new CustomError("", 500, "");
         const defaultErrorMessage = "Something went wrong :(";
