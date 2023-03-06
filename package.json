@@ -10,7 +10,8 @@
     "build:dev": "tsc --watch",
     "test": "npx jest",
     "test:dev": "npx jest --watch",
-    "test:coverage": "npx jest --coverage --watchAll=false --passWithNoTests"
+    "test:coverage": "npx jest --coverage --watchAll=false --passWithNoTests",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "express": "^4.18.2",
     "jest-ts-webcompat-resolver": "^1.0.0",
     "ts-jest": "^29.0.5",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "husky": "^8.0.0"
   }
 }
