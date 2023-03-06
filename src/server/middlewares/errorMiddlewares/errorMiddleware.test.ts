@@ -1,6 +1,6 @@
 import { type Request, type NextFunction, type Response } from "express";
 import { CustomError } from "../../../CustomError/CustomError";
-import { generalError } from "./errorMiddlewares";
+import { generalError, notFoundError } from "./errorMiddlewares";
 
 const mockRes: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
@@ -74,6 +74,21 @@ describe("Given a generalError middleware", () => {
           error: defaultErrorMessage,
         });
       });
+    });
+  });
+});
+
+describe("Given the notFoundError middlware", () => {
+  describe("When it receives a request", () => {
+    test("Then it should call the received next function with status code 404", () => {
+      const mockNext = jest.fn();
+      const statusCode = 404;
+
+      notFoundError(mockReq as Request, mockRes as Response, mockNext);
+
+      expect(mockNext).toHaveBeenCalledWith(
+        expect.objectContaining({ statusCode })
+      );
     });
   });
 });
