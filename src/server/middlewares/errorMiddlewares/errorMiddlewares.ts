@@ -14,5 +14,5 @@ export const generalError = (
 
   res
     .status(error.statusCode || 500)
-    .json({ error: error.publicMessage || "Something went wrong" });
+    .json({ error: error.publicMessage || "Something went wrong :(" });
 };
