@@ -1,3 +1,4 @@
+import "../../../loadEnvironment";
 import mongoose from "mongoose";
 import request from "supertest";
 import bcrypt from "bcryptjs";
@@ -45,11 +46,9 @@ describe("Given the POST /users/login endpoint", () => {
   };
 
   describe("When it receives a request with a user with username 'notDiana' and password '12345678' and the user exists", () => {
-    test("Then it should respond with status 200 and property token with value 'mocken'", async () => {
-      const path = "/users/login";
-
+    test("Then it should respond with status 200 and property token", async () => {
       const response = await request(app)
-        .post(path)
+        .post(`${paths.users.path}${paths.users.endpoints.login}`)
         .send(userLoginCredentials)
         .expect(okCode);
 
