@@ -18,7 +18,7 @@ const req: Partial<
     UserLoginCredentials
   >
 > = {};
-const next = jest.fn() as NextFunction;
+const next: NextFunction = jest.fn();
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -84,6 +84,28 @@ describe("Given a loginUser controller", () => {
       );
 
       expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+
+  describe("When the database responds with an error", () => {
+    test("Then it should call its next method", async () => {
+      const errorDatabase = new Error("error");
+
+      User.findOne = jest.fn().mockImplementationOnce(() => ({
+        exec: jest.fn().mockRejectedValue(errorDatabase),
+      }));
+
+      await loginUser(
+        req as Request<
+          Record<string, unknown>,
+          Record<string, unknown>,
+          UserLoginCredentials
+        >,
+        res as Response,
+        next
+      );
+
+      expect(next).toHaveBeenCalledWith(errorDatabase.message);
     });
   });
 
