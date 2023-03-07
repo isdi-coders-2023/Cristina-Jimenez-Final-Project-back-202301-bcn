@@ -1,8 +1,12 @@
 import { Router } from "express";
 import { loginUser } from "../../controllers/userControllers/userControllers.js";
-import usersRouterPaths from "./routes.js";
+import { paths } from "../../paths/paths.js";
 
-const { login } = usersRouterPaths;
+const {
+  users: {
+    endpoints: { login },
+  },
+} = paths;
 
 const usersRouter = Router();
 

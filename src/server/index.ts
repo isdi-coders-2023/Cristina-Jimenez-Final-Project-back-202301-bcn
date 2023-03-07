@@ -2,15 +2,15 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import pongController from "./controllers/pongController/pongController.js";
-import paths from "./routes.js";
 import usersRouter from "./routers/usersRouter/usersRouter.js";
 import {
   generalError,
   notFoundError,
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
+import { paths } from "./paths/paths.js";
 
 export const app = express();
-const { usersPath } = paths;
+const { users } = paths;
 
 app.disable("x-powered-by");
 
@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use(usersPath, usersRouter);
+app.use(users.path, usersRouter);
 
 app.get("/pong", pongController);
 
