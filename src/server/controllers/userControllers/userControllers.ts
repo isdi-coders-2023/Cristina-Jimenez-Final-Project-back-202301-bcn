@@ -1,3 +1,4 @@
+import "../../../loadEnvironment.js";
 import { type NextFunction, type Request, type Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -17,7 +18,6 @@ export const loginUser = async (
 ) => {
   try {
     const { password, username }: UserLoginCredentials = req.body;
-
     const user = await User.findOne({ username }).exec();
 
     if (!user) {
