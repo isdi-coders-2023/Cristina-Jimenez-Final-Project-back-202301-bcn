@@ -40,7 +40,7 @@
     "jest-ts-webcompat-resolver": "^1.0.0",
     "jsonwebtoken": "^9.0.0",
     "lint-staged": "^13.1.2",
-    "mongoose": "^7.0.1",
+    "mongoose": "^6.10.1",
     "morgan": "^1.10.0",
     "prettier": "^2.8.4",
     "ts-jest": "^29.0.5",

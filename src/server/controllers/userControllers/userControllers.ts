@@ -3,20 +3,20 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { CustomError } from "../../../CustomError/CustomError";
 import User from "../../../database/models/User";
-import { type UserCredentials } from "../../types";
+import { type UserLoginCredentials } from "../../types";
 import { type CustomJwtPayload } from "./types";
 
 export const loginUser = async (
   req: Request<
     Record<string, unknown>,
     Record<string, unknown>,
-    UserCredentials
+    UserLoginCredentials
   >,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { password, username } = req.body;
+    const { password, username }: UserLoginCredentials = req.body;
 
     const user = await User.findOne({ username }).exec();
 
