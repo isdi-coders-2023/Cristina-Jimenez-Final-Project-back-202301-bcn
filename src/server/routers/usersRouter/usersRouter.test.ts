@@ -30,20 +30,18 @@ beforeAll(async () => {
   const mongodbServerUrl = mockMongoDbServer.getUri();
 
   await connectDatabase(mongodbServerUrl);
-});
 
-afterAll(async () => {
-  await mongoose.connection.close();
-  await mockMongoDbServer.stop();
-});
-
-beforeAll(async () => {
   const userData: UserStructure = {
     username: "notDiana",
     password: await bcrypt.hash("12345678", 10),
     email: "notDiana@gmail.com",
   };
   await User.create(userData);
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+  await mockMongoDbServer.stop();
 });
 
 describe("Given the POST /users/login endpoint", () => {
