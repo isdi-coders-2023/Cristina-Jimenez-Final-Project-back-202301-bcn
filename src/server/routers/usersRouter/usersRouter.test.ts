@@ -15,6 +15,13 @@ const {
   clientError: { unauthorized },
 } = statusCodes;
 
+const {
+  users: {
+    endpoints: { login },
+    path,
+  },
+} = paths;
+
 let mockMongoDbServer: MongoMemoryServer;
 
 beforeAll(async () => {
@@ -48,7 +55,7 @@ describe("Given the POST /users/login endpoint", () => {
   describe("When it receives a request with a user with username 'notDiana' and password '12345678' and the user exists", () => {
     test("Then it should respond with status 200 and property token", async () => {
       const response = await request(app)
-        .post(`${paths.users.path}${paths.users.endpoints.login}`)
+        .post(`${path}${login}`)
         .send(userLoginCredentials)
         .expect(okCode);
 
@@ -63,10 +70,9 @@ describe("Given the POST /users/login endpoint", () => {
         password: "123456789888",
       };
       const expectedMessage = "Wrong credentials";
-      const path = `${paths.users.path}${paths.users.endpoints.login}`;
 
       const response = await request(app)
-        .post(path)
+        .post(`${path}${login}`)
         .send(userLoginCredentialsWithWrongPassword)
         .expect(unauthorized);
 

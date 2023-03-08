@@ -9,8 +9,11 @@ import {
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
 import { paths } from "./paths/paths.js";
 
+const {
+  users: { path },
+} = paths;
+
 export const app = express();
-const { users } = paths;
 
 app.disable("x-powered-by");
 
@@ -25,7 +28,7 @@ app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use(users.path, usersRouter);
+app.use(path, usersRouter);
 
 app.get("/pong", pongController);
 
