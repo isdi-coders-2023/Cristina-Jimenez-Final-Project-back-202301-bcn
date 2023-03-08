@@ -1,4 +1,6 @@
+import { error } from "console";
 import { type Request, type NextFunction, type Response } from "express";
+import { type errors, ValidationError } from "express-validation";
 import { CustomError } from "../../../CustomError/CustomError";
 import { generalError, notFoundError } from "./errorMiddlewares";
 
@@ -73,6 +75,39 @@ describe("Given a generalError middleware", () => {
 
         expect(mockRes.json).toHaveBeenCalledWith({
           error: defaultErrorMessage,
+        });
+      });
+    });
+
+    describe("When it receives a validation error", () => {
+      test("Then it should respond with error: 'Validation failed'", () => {
+        const errors: Partial<errors> = {
+          body: [
+            {
+              name: "ValidationError",
+              isJoi: true,
+              annotate(stripColors) {
+                return "";
+              },
+              _original: "",
+              message: "this is the message that will be displayed with debug",
+              details: [{ message: "", path: [""], type: "" }],
+            },
+          ],
+        };
+
+        const validationError = new ValidationError(errors, {});
+        const expectedMessage = "Validation Failed";
+
+        generalError(
+          validationError as unknown as CustomError,
+          mockReq as Request,
+          mockRes as Response,
+          mockNext
+        );
+
+        expect(mockRes.json).toHaveBeenCalledWith({
+          error: expectedMessage,
         });
       });
     });

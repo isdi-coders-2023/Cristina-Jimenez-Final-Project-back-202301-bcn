@@ -1,14 +1,9 @@
-import {
-  response,
-  type NextFunction,
-  type Request,
-  type Response,
-} from "express";
+import { type NextFunction, type Request, type Response } from "express";
 import createDebug from "debug";
 import { CustomError } from "../../../CustomError/CustomError.js";
 import { ValidationError } from "express-validation";
 
-export const debug = createDebug("pokedex:server:middlewares:errorMiddlewares");
+export const debug = createDebug("pokedex:server:middlewares:errorMiddleware");
 
 export const notFoundError = (
   req: Request,
@@ -37,7 +32,7 @@ export const generalError = (
 
     debug(validationErrors);
 
-    res.status(401).json({ error: error.message });
+    res.status(error.statusCode).json({ error: error.message });
     return;
   }
 
