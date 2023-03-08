@@ -10,12 +10,7 @@ const connectDatabase = async (url: string) => {
       delete returnedObject._id;
     },
   });
-
-  try {
-    await mongoose.connect(url);
-  } catch (error: unknown) {
-    throw new Error((error as Error).message);
-  }
+  await mongoose.connect(url);
 };
 
 export default connectDatabase;
