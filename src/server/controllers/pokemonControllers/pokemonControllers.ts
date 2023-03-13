@@ -11,7 +11,6 @@ const {
 const getPokemon = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const pokemon = await Pokemon.find().exec();
-
     res.status(okCode).json({ pokemon });
   } catch (error: unknown) {
     const getPokemonError = new CustomError(
