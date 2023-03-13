@@ -1,11 +1,6 @@
 import { Router } from "express";
-import getPokemon from "../../controllers/pokemonControllers/pokemonControllers";
-import { paths } from "../../paths/paths";
+import getPokemon from "../../controllers/pokemonControllers/pokemonControllers.js";
 
-const {
-  pokemon: { pokemonPath },
-} = paths;
+export const pokemonRouter = Router();
 
-const pokemonRouter = Router();
-
-pokemonRouter.get(pokemonPath, getPokemon);
+pokemonRouter.get("/", getPokemon);

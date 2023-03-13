@@ -1,8 +1,11 @@
 export interface Paths {
   users: {
-    path: string;
+    usersPath: string;
     endpoints: {
       login: string;
     };
+  };
+  pokemon: {
+    pokemonPath: string;
   };
 }

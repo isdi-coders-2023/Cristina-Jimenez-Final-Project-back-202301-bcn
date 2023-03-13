@@ -23,12 +23,12 @@ const userPokemonSchema = new Schema({
     type: Number,
     required: true,
   },
-  imageuUrl: {
+  imageUrl: {
     type: String,
     required: true,
   },
 });
 
-const Pokemon = model("Pokemon", userPokemonSchema, "Pokemon");
+const UserPokemon = model("UserPokemon", userPokemonSchema, "userPokemon");
 
-export default Pokemon;
+export default UserPokemon;
