@@ -23,6 +23,10 @@ const userPokemonSchema = new Schema({
     type: Number,
     required: true,
   },
+  imageuUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 const Pokemon = model("Pokemon", userPokemonSchema, "Pokemon");
