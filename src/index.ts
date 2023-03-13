@@ -16,5 +16,5 @@ try {
   await startServer(+port);
   debug(chalk.green(`Server listening on port ${chalk.yellowBright(port)}`));
 } catch (error: unknown) {
-  debug((error as Error).message);
+  debug(`${(error as Error).message}`);
 }
