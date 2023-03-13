@@ -21,27 +21,11 @@ export const loginUser = async (
     const user = await User.findOne({ username }).exec();
 
     if (!user) {
-      const userError = new CustomError(
-        "Wrong username",
-        401,
-        "Wrong credentials"
-      );
-
-      next(userError);
-
-      return;
+      throw new CustomError("Wrong username", 401, "Wrong credentials");
     }
 
     if (!(await bcrypt.compare(password, user.password))) {
-      const userError = new CustomError(
-        "Wrong password",
-        401,
-        "Wrong credentials"
-      );
-
-      next(userError);
-
-      return;
+      throw new CustomError("Wrong password", 401, "Wrong credentials");
     }
 
     const jwtPayload: CustomJwtPayload = {
@@ -55,6 +39,6 @@ export const loginUser = async (
 
     res.status(200).json({ token });
   } catch (error) {
-    next((error as Error).message);
+    next(error);
   }
 };

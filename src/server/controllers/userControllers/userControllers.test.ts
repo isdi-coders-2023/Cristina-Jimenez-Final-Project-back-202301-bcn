@@ -105,7 +105,7 @@ describe("Given a loginUser controller", () => {
         next
       );
 
-      expect(next).toHaveBeenCalledWith(errorDatabase.message);
+      expect(next).toHaveBeenCalledWith(errorDatabase);
     });
   });
 
