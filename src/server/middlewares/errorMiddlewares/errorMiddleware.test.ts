@@ -1,4 +1,3 @@
-import { error } from "console";
 import { type Request, type NextFunction, type Response } from "express";
 import { type errors, ValidationError } from "express-validation";
 import { CustomError } from "../../../CustomError/CustomError";
@@ -81,7 +80,7 @@ describe("Given a generalError middleware", () => {
 
     describe("When it receives a validation error", () => {
       test("Then it should respond with error: 'Validation failed'", () => {
-        const errors: Partial<errors> = {
+        const errors: errors = {
           body: [
             {
               name: "ValidationError",
