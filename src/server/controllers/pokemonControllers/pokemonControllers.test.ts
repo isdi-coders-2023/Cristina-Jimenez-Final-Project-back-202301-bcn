@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { CustomError } from "../../../CustomError/CustomError";
-import Pokemon from "../../../database/models/Pokemon";
+import Pokemon from "../../../database/models/UserPokemon";
 import statusCodes from "../../utils/statusCodes";
 import getPokemon from "./pokemonControllers";
 

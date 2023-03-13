@@ -18,7 +18,7 @@ const {
 const {
   users: {
     endpoints: { login },
-    path,
+    usersPath,
   },
 } = paths;
 
@@ -53,7 +53,7 @@ describe("Given the POST /users/login endpoint", () => {
   describe("When it receives a request with a user with username 'notDiana' and password '12345678' and the user exists", () => {
     test("Then it should respond with status 200 and property token", async () => {
       const response = await request(app)
-        .post(`${path}${login}`)
+        .post(`${usersPath}${login}`)
         .send(userLoginCredentials)
         .expect(okCode);
 
@@ -70,7 +70,7 @@ describe("Given the POST /users/login endpoint", () => {
       const expectedMessage = "Wrong credentials";
 
       const response = await request(app)
-        .post(`${path}${login}`)
+        .post(`${usersPath}${login}`)
         .send(userLoginCredentialsWithWrongPassword)
         .expect(unauthorized);
 

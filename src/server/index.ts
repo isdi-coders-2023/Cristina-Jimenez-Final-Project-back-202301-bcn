@@ -8,9 +8,11 @@ import {
   notFoundError,
 } from "./middlewares/errorMiddlewares/errorMiddlewares.js";
 import { paths } from "./paths/paths.js";
+import { pokemonRouter } from "./routers/pokemonRouter/pokemonRouter.js";
 
 const {
-  users: { path },
+  users: { usersPath },
+  pokemon: { pokemonPath },
 } = paths;
 
 export const app = express();
@@ -28,7 +30,8 @@ app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use(path, usersRouter);
+app.use(usersPath, usersRouter);
+app.use(pokemonPath, pokemonRouter);
 
 app.get("/pong", pongController);
 
